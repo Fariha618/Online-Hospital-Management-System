@@ -1,0 +1,29 @@
+<!-- hospital/templates/hospital/medical_record_list.html -->
+
+{% extends 'hospital/base.html' %}
+
+{% block content %}
+<h2>Medical Records</h2>
+    <a href="{% url 'medical_record_add' %}">Add New Record</a>
+    <h2>List of Medical Records</h2>
+    <table border="1">
+        <!-- Table headers -->
+        <tr>
+            <th>Patient</th>
+            <th>Record Date</th>
+            <th>Actions</th>
+        </tr>
+        <!-- Table data -->
+        {% for record in records %}
+        <tr>
+            <td>{{ record.patient }}</td>
+            <td>{{ record.record_date }}</td>
+            <td>
+                <a href="{% url 'medical_record_detail' record.id %}">View</a>
+                <a href="{% url 'medical_record_edit' record.id %}">Edit</a>
+                <a href="{% url 'medical_record_delete' record.id %}" onclick="return confirm('Are you sure?');">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'hospital/base.html' %}
+
+{% block content %}
+<div class="appointment-detail-container">
+    <h2>Appointment Details</h2>
+
+    <div class="appointment-info">
+        <p><strong>Patient:</strong> {{ appointment.patient }}</p>
+        <p><strong>Staff Member:</strong> {{ appointment.staff_member }}</p>
+        <p><strong>Date and Time:</strong> {{ appointment.date_time }}</p>
+        <p><strong>Notes:</strong> {{ appointment.notes }}</p>
+        <p><strong>Status:</strong> {{ appointment.get_status_display }}</p>
+    </div>
+
+    <div class="appointment-actions">
+        <a href="{% url 'appointment_edit' appointment.id %}" class="button">Edit</a>
+        <a href="{% url 'appointment_delete' appointment.id %}" class="button">Delete</a>
+        <a href="{% url 'change_appointment_status' appointment.id 'approved' %}" class="button">Approve</a>
+        <a href="{% url 'change_appointment_status' appointment.id 'canceled' %}" class="button">Cancel</a>
+    </div>
+</div>
+{% endblock %}

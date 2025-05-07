@@ -1,0 +1,27 @@
+<!-- hospital/templates/hospital/staff_form.html -->
+{% extends 'hospital/base.html' %}
+
+{% block content %}
+<h2>{% if form.instance.pk %}Edit Staff{% else %}Add Staff{% endif %}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+    <a href="{% url 'staff_list' %}" class="cancel-button">Cancel</a>
+</form>
+{% endblock %}
+
+<style>
+.cancel-button {
+    padding: 10px;
+    background-color: #f44336;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.cancel-button:hover {
+    background-color: #d32f2f;
+}
+</style>

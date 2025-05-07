@@ -1,0 +1,81 @@
+<!-- hospital/templates/hospital/patient_detail.html -->
+
+{% extends 'hospital/base.html' %}
+
+{% block content %}
+<div class="patient-detail-container">
+    <h2>Patient Details</h2>
+
+    <div class="patient-info">
+        <p><strong>Name:</strong> {{ patient.name }}</p>
+        <p><strong>Date of Birth:</strong> {{ patient.date_of_birth }}</p>
+        <p><strong>Address:</strong> {{ patient.address }}</p>
+        <p><strong>Phone:</strong> {{ patient.phone }}</p>
+        <p><strong>Email:</strong> {{ patient.email }}</p>
+    </div>
+
+    <div class="patient-actions">
+        <a href="{% url 'patient_edit' patient.id %}" class="button">Edit</a>
+        <a href="{% url 'patient_delete' patient.id %}"  class="button" onclick="return confirm('Are you sure?');">Delete</a>
+    </div>
+    
+    <!-- Appointments History Table -->
+    <h3>Appointments History</h3>
+    <table border="1">
+        <tr>
+            <th>Date/Time</th>
+            <th>Doctor</th>
+            <th>Notes</th>
+        </tr>
+        {% for appointment in appointments %}
+        <tr>
+            <td>{{ appointment.date_time }}</td>
+            <td>{{ appointment.staff_member }}</td>
+            <td>{{ appointment.notes }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3">No appointments found</td></tr>
+        {% endfor %}
+    </table>
+
+    <!-- Medical Records History Table -->
+    <h3>Medical Records History</h3>
+    <table border="1">
+        <tr>
+            <th>Record Date</th>
+            <th>Details</th>
+            <th>Prescription</th>
+        </tr>
+        {% for record in medical_records %}
+        <tr>
+            <td>{{ record.record_date }}</td>
+            <td>{{ record.details }}</td>
+            <td>{{ record.prescription }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3">No medical records found</td></tr>
+        {% endfor %}
+    </table>
+
+</div>
+{% endblock %}
+
+<style>
+.patient-detail-container { padding: 20px; }
+.patient-info p { margin: 10px 0; }
+.patient-actions { margin-top: 20px; }
+.button { padding: 10px; margin-right: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+.button:hover { background-color: #0056b3; }
+table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>

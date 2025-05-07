@@ -1,0 +1,59 @@
+<!-- hospital/templates/hospital/staff_detail.html -->
+
+{% extends 'hospital/base.html' %}
+
+{% block content %}
+<div class="staff-detail-container">
+    <h2>Doctor Details</h2>
+
+    <div class="staff-info">
+        <p><strong>Name:</strong> {{ staff_member.name }}</p>
+        <p><strong>Position:</strong> {{ staff_member.position }}</p>
+        <p><strong>Hire Date:</strong> {{ staff_member.hire_date }}</p>
+    </div>
+
+    <div class="staff-actions">
+        <a href="{% url 'staff_edit' staff_member.id %}" class="button">Edit</a>
+        <a href="{% url 'staff_delete' staff_member.id %}" class="button" onclick="return confirm('Are you sure?');">Delete</a>
+    </div>
+
+    <h3>Appointments Handled</h3>
+    <table border="1">
+        <tr>
+            <th>Date/Time</th>
+            <th>Patient</th>
+            <th>Notes</th>
+        </tr>
+        {% for appointment in appointments %}
+        <tr>
+            <td>{{ appointment.date_time }}</td>
+            <td>{{ appointment.patient.name }}</td>
+            <td>{{ appointment.notes }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3">No appointments handled</td></tr>
+        {% endfor %}
+    </table>
+
+</div>
+{% endblock %}
+
+<style>
+.staff-detail-container { padding: 20px; }
+.staff-info p { margin: 10px 0; }
+.staff-actions { margin-top: 20px; }
+.button { padding: 10px; margin-right: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+.button:hover { background-color: #0056b3; }
+table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>

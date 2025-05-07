@@ -1,0 +1,13 @@
+<!-- hospital/templates/hospital/appointment_form.html -->
+
+{% extends 'hospital/base.html' %}
+
+{% block content %}
+<h2>{% if form.instance.pk %}Edit Appointment{% else %}Add Appointment{% endif %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+        <a href="{% url 'appointment_list' %}">Cancel</a>
+    </form>
+{% endblock %}

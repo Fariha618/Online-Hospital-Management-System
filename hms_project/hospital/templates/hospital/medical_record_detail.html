@@ -1,0 +1,27 @@
+<!-- hospital/templates/hospital/medical_record_detail.html -->
+
+{% extends 'hospital/base.html' %}
+
+{% block content %}
+<div class="medical-record-detail">
+    <h2>Medical Record Detail</h2>
+    <p><strong>Patient:</strong> {{ record.patient }}</p>
+    <p><strong>Record Date:</strong> {{ record.record_date }}</p>
+    <p><strong>Notes:</strong> {{ record.notes }}</p>
+    <p><strong>Prescription:</strong> {{ record.prescription }}</p>
+    <p><strong>Details:</strong> {{ record.details }}</p>
+
+    <div class="actions">
+        <a href="{% url 'medical_record_edit' record.id %}" class="button">Edit</a>
+        <a href="{% url 'medical_record_delete' record.id %}" class="button" onclick="return confirm('Are you sure?');">Delete</a>
+    </div>
+</div>
+{% endblock %}
+
+<style>
+.medical-record-detail { padding: 20px; }
+.medical-record-detail p { margin-bottom: 10px; }
+.actions { margin-top: 20px; }
+.button { padding: 10px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+.button:hover { background-color: #0056b3; }
+</style>

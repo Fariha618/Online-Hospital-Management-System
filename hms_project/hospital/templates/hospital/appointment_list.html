@@ -1,0 +1,53 @@
+{% extends 'hospital/base.html' %}
+
+{% block content %}
+<div class="appointment-list-container">
+    <h2>Appointment List</h2>
+    <a href="{% url 'appointment_add' %}" class="button">Add New Appointment</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Date and Time</th>
+                <th>Status</th>
+                <th>Actions</th>
+                <th>Edit/Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+            <tr>
+                <td>{{ appointment.patient }}</td>
+                <td>{{ appointment.staff_member }}</td>
+                <td>{{ appointment.date_time }}</td>
+                <td>{{ appointment.get_status_display }}</td>
+                <td>
+                    <!-- Approve and Cancel Actions -->
+                    <a href="{% url 'appointment_approve' appointment.id %}" class="button">&#10004;</a> <!-- Checkmark symbol -->
+                    <a href="{% url 'appointment_cancel' appointment.id %}" class="button">&#10006;</a> <!-- Cross symbol -->
+                </td>
+                <td>
+                    <!-- Edit and Delete Actions -->
+                    <a href="{% url 'appointment_edit' appointment.id %}" class="button">Edit</a>
+                    <a href="{% url 'appointment_delete' appointment.id %}" class="button" onclick="return confirm('Are you sure?');">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No appointments found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+<style>
+.appointment-list-container { padding: 20px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+.button { padding: 5px 10px; margin-right: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+.button:hover { background-color: #0056b3; }
+</style>

@@ -1,0 +1,28 @@
+<!-- hospital/templates/hospital/dashboard.html -->
+
+{% extends 'hospital/base.html' %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="sidebar">
+        <!-- Sidebar navigation -->
+        <ul>
+            <li><a href="{% url 'staff_list' %}">Doctors</a></li>
+            <li><a href="{% url 'patient_list' %}">Patients</a></li>
+            <li><a href="{% url 'appointment_list' %}">Appointments</a></li>
+            <li><a href="{% url 'medical_record_list' %}">Medical Records</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <!-- Main content here -->
+    </div>
+</div>
+{% endblock %}
+
+<style>
+    .dashboard-container { display: flex; }
+    .sidebar { width: 200px; }
+    .main-content { flex-grow: 1; }
+    /* Add more styles as needed */
+</style>

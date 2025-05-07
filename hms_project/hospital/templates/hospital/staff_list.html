@@ -1,0 +1,26 @@
+<!-- hospital/templates/hospital/staff_list.html -->
+
+{% extends 'hospital/base.html' %}
+
+{% block content %}
+<h2>Doctors</h2>
+<a href="{% url 'staff_add' %}">Add Doctor</a>
+<h2>List of Doctors</h2>
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Hire Date</th>
+        <th>Actions</th>
+    </tr>
+    {% for staff in staff_members %}
+    <tr>
+        <td><a href="{% url 'staff_detail' staff.id %}">{{ staff.name }}</a></td>
+        <td>{{ staff.hire_date }}</td>
+        <td>
+            <a href="{% url 'staff_edit' staff.id %}">Edit</a>
+            <a href="{% url 'staff_delete' staff.id %}" onclick="return confirm('Are you sure?');">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
